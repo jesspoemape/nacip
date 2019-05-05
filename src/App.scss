@@ -1,0 +1,213 @@
+.App {
+  text-align: center;
+}
+
+// COLORS
+$orange: #d35400;
+$lightGray: #eaeaea;
+$mediumGrey: #c5c5c5;
+$turquoise: #1abc9c;
+$purple: #8e44ad;
+$yellow: #f1c40f;
+
+@mixin customCheckbox($borderRadius, $color) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    position: relative;
+    background-color: #fff;
+    color: #666;
+    height: 30px;
+    width: 30px;
+    border: 1px solid $mediumGrey;
+    border-radius: $borderRadius;
+    cursor: pointer;     
+    margin-right: 7px;
+    outline: none;
+
+    &:checked {
+        background-color: $color;
+        transition: 150ms background-color ease-in;
+
+        &:before {
+            position: absolute;
+            font-size: 1.5em;
+            left: 10px;
+            top: 2px;
+            content: '\02143';
+            transform: rotate(40deg);
+            color: white;
+        }
+    }
+
+    &:hover {
+        background-color: lighten($color, 10%);
+        cursor: pointer;
+    }
+}
+
+/* HEADER */
+
+header {
+    margin: 2em;
+}
+
+// FOOTER
+footer {
+    height: 200px;
+    text-align: center;
+    background-color: $lightGray;
+    margin-top: 3em;
+}
+
+/* NAV */
+nav {
+    margin: 1em;
+    a {
+        text-decoration: none;
+        padding: 1em;
+        text-transform: uppercase;
+        color: black;
+        transition: 150ms background-color ease-in;
+
+        &:hover {
+            background-color: $lightGray;
+        }
+    }
+}
+
+/* PAGES */
+/* -- VENDORS */
+#vendors {
+    margin: 0 10%;
+
+    table {
+        border-collapse: collapse;
+        border: 1px solid $lightGray;
+        width: 100%;
+
+        tr {
+            &:nth-child(even) {
+                background-color: $lightGray;
+            }
+
+           th, td {
+                padding: .5em;
+                text-align: left;
+            }
+
+            th {
+                background-color: $turquoise;
+            }
+        }
+        
+    }
+
+    .becomeAVendor {
+        background-color: $purple;
+        color: white;
+        text-transform: uppercase;
+        border: none;
+        padding: 1em 3em;
+        font-size: 1em;
+        transition: 150ms background-color ease-in;
+        margin-top: 2em;
+
+        &:hover {
+            background-color: darken($purple, 10%);
+            cursor: pointer;
+        }
+    }
+
+    form {
+        text-align: left;
+
+        h3 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 1em 0;
+        }
+
+        button {
+            padding: 1em;
+            text-transform: uppercase;
+            background-color: $turquoise;
+            border: none;
+            color: white;
+            font-size: 1em;
+            width: 25%;
+            margin: 0 auto;
+            margin-top: 2em;
+            font-weight: bold;
+            transition: 150ms background-color ease-in;
+
+            &:not(.disabled):hover {
+                background-color: darken($turquoise, 10%);
+                cursor: pointer;
+            }
+
+            &.disabled {
+                background-color: $lightGray;
+            }
+        }
+
+        .vendorType {
+            input {
+                margin-right: 1em;
+                @include customCheckbox(50px, $orange);
+            }
+            label {
+                display: flex;
+                align-items: center;
+                margin: .5em 0;
+                padding: .5em;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .contactInformation {
+            margin-top: 2em;
+
+            input {
+                padding: 1em;
+                display: block;
+                width: 100%;
+                margin-top: .5em;
+
+                &:focus {
+                    outline: 2px solid $purple;
+                }
+            }
+            label span {
+                text-transform: uppercase;
+                font-size: 65%;
+            }
+        }
+
+        .termsAndConditions {
+            margin-top: 2em;
+
+            input{
+                @include customCheckbox(0px, $yellow);
+                margin-right: 1em;
+            }
+            label {
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        
+    }
+}
