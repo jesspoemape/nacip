@@ -2,7 +2,7 @@ import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 
-const StripeButton = ({ amount }) => {
+const StripeButton = ({ amount, children }) => {
     const publishableKey = "pk_test_gEdJvOYvEMSITbvwdoZ05jnf00FULwrN5f";
 
     const onToken = token => {
@@ -31,7 +31,10 @@ const StripeButton = ({ amount }) => {
             stripeKey={publishableKey}
             image="https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" //Pop-in header image
             billingAddress={false}
-        />
+            allowRememberMe={false}
+        >
+            {children}
+        </StripeCheckout>
     );
 };
 export default StripeButton;

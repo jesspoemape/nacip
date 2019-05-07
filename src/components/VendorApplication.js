@@ -121,6 +121,9 @@ const VendorApplication = () => {
                     </label>
                 </div>
                 
+                
+            </form>
+            <StripeButton amount={applicationCost} vendorType={vendorType}>
                 <button
                     className={`${formIsValid ? '' : 'disabled'}`}
                     disabled={!formIsValid}
@@ -128,8 +131,7 @@ const VendorApplication = () => {
                 >
                     Submit
                 </button>
-            </form>
-            <StripeButton amount={applicationCost} vendorType={vendorType} />
+            </StripeButton>
         </Fragment>
 
     );
