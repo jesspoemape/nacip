@@ -132,29 +132,7 @@ nav {
             margin: 1em 0;
         }
 
-        button {
-            padding: 1em;
-            text-transform: uppercase;
-            background-color: $turquoise;
-            border: none;
-            color: white;
-            font-size: 1em;
-            width: 25%;
-            margin: 0 auto;
-            margin-top: 2em;
-            font-weight: bold;
-            transition: 150ms background-color ease-in;
-
-            &:not(.disabled):hover {
-                background-color: darken($turquoise, 10%);
-                cursor: pointer;
-            }
-
-            &.disabled {
-                background-color: $lightGray;
-            }
-        }
-
+        
         .vendorType {
             input {
                 margin-right: 1em;
@@ -165,22 +143,22 @@ nav {
                 align-items: center;
                 margin: .5em 0;
                 padding: .5em;
-
+                
                 &:hover {
                     cursor: pointer;
                 }
             }
         }
-
+        
         .contactInformation {
             margin-top: 2em;
-
+            
             input {
                 padding: 1em;
                 display: block;
                 width: 100%;
                 margin-top: .5em;
-
+                
                 &:focus {
                     outline: 2px solid $purple;
                 }
@@ -190,10 +168,10 @@ nav {
                 font-size: 65%;
             }
         }
-
+        
         .termsAndConditions {
             margin-top: 2em;
-
+            
             input{
                 @include customCheckbox(0px, $yellow);
                 margin-right: 1em;
@@ -201,13 +179,36 @@ nav {
             label {
                 display: flex;
                 align-items: center;
-
+                
                 &:hover {
                     cursor: pointer;
                 }
             }
         }
-
         
+        
+    }
+    
+    button {
+        padding: 1em;
+        text-transform: uppercase;
+        background-color: $turquoise;
+        border: none;
+        color: white;
+        font-size: 1em;
+        width: 25%;
+        margin: 0 auto;
+        margin-top: 2em;
+        font-weight: bold;
+        transition: 150ms background-color ease-in;
+
+        &:not(.disabled):hover {
+            background-color: darken($turquoise, 10%);
+            cursor: pointer;
+        }
+
+        &.disabled {
+            background-color: $lightGray;
+        }
     }
 }

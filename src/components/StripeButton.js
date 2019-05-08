@@ -30,7 +30,7 @@ const StripeButton = ({ amount, children }) => {
             token={onToken}
             stripeKey={publishableKey}
             image="https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" //Pop-in header image
-            billingAddress={false}
+            billingAddress
             allowRememberMe={false}
         >
             {children}

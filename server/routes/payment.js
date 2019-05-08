@@ -1,4 +1,5 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+console.log('process.env.STRIPE_SECRET_KEY: ', process.env.STRIPE_SECRET_KEY);
 
 const stripeChargeCallback = res => (stripeErr, stripeRes) => {
     if (stripeErr) {
@@ -19,9 +20,9 @@ const paymentApi = app => {
         const body = {
             source: req.body.token.id,
             amount: req.body.amount,
-            currency: "usd"
+            currency: "usd",
+            receipt_email: req.body.token.email,
         };
-        console.log('here posting');
         stripe.charges.create(body, stripeChargeCallback(res));
     });
 
