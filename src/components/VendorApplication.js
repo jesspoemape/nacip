@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import moment from 'moment';
+import axios from 'axios';
 import { applicationCosts } from './../utils/applicationCosts';
 import StripeButton from './StripeButton';
 
@@ -26,9 +27,62 @@ const VendorApplication = ({ setShowApplication }) => {
             setFormIsValid(true);
     }
 
-    const handleSubmit = (e, token, addresses) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submitted');
+        const data = new FormData(e.target);
+        const userId = Date.now();
+        const parsedData = JSON.parse(stringifyFormData(data));
+        Object.keys(parsedData).forEach(itemKey => {
+            const item = parsedData[itemKey];
+            if (item.length === 0) {
+                delete parsedData[itemKey];
+                
+            };
+        });
+        console.log('parsedData::', parsedData);
+        const fakeData = {
+            "Vendor Type": vendorType,
+            "Contact Name": contactName,
+            "Company Name": companyName,
+            "Company Address 1": companyAddress1,
+            "Company Address 2": companyAddress2, 
+            "Company Address 2": companyAddress3, 
+            "Contact Email": contactEmail,
+            "Contact Phone": contactPhone,
+            "Accepted Terms and Conditions": agreeToTC,
+            "Date": new Date(),
+        };
+        const sheetsScriptURL = process.env.SHEETS_SCRIPT_URL;
+        axios.post(sheetsScriptURL, { data: fakeData })
+            .then(() => {
+                alert('Form Submitted!')
+                resetForm();
+            })
+            .catch(e => {
+                console.log('ERROR:: ', e);
+            }
+        );
+    }
+
+    const stringifyFormData = (fd) => {
+        const data = {};
+          for (let key of fd.keys()) {
+            data[key] = fd.get(key);
+        }
+        return JSON.stringify(data, null, 2);
+    }
+
+    const resetForm = () => {
+        setVendorType(null);
+        setContactName('');
+        setCompanyName('');
+        setCompanyAddress1('');
+        setCompanyAddress2('');
+        setCompanyAddress3('');
+        setContactEmail('');
+        setContactPhone('');
+        setAgreeToTC(false);
+        setFormIsValid(false);
     }
 
     const now = moment();
@@ -43,7 +97,7 @@ const VendorApplication = ({ setShowApplication }) => {
 
     return (
         <Fragment>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h3>Vendor Application</h3>
                 <div className="vendorType">
                 <hr />
@@ -51,7 +105,7 @@ const VendorApplication = ({ setShowApplication }) => {
                     <label className={`${vendorType === 'food' ? 'checked' : ''}`}>
                         <input
                             type="radio"
-                            name="food"
+                            name="Vendor Type"
                             value="food"
                             checked={vendorType === 'food'}
                             onChange={() => setVendorType('food')}
@@ -61,7 +115,7 @@ const VendorApplication = ({ setShowApplication }) => {
                     <label className={`${vendorType === 'nonProfit' ? 'checked' : ''}`}>
                         <input
                             type="radio"
-                            name="nonProfit"
+                            name="Vendor Type"
                             value="nonProfit"
                             checked={vendorType === 'nonProfit'}
                             onChange={() => setVendorType('nonProfit')}
@@ -71,7 +125,7 @@ const VendorApplication = ({ setShowApplication }) => {
                     <label className={`${vendorType === 'artsAndCrafts' ? 'checked' : ''}`}>
                         <input
                             type="radio"
-                            name="artsAndCrafts"
+                            name="Vendor Type"
                             value="artsAndCrafts"
                             checked={vendorType === 'artsAndCrafts'}
                             onChange={() => setVendorType('artsAndCrafts')}
@@ -94,30 +148,70 @@ const VendorApplication = ({ setShowApplication }) => {
                     <p>Contact Information</p>
                     <label>
                         <span>Contact Name</span>
-                        <input type="text" onChange={e => setContactName(e.target.value)} value={contactName} />
+                        <input
+                            type="text"
+                            onChange={e => setContactName(e.target.value)}
+                            value={contactName}
+                            name="Contact Name"
+                        />
                     </label>
                     <label>
                         <span>Company Name</span>
-                        <input type="text" onChange={e => setCompanyName(e.target.value)} value={companyName} />
+                        <input
+                            type="text"
+                            onChange={e => setCompanyName(e.target.value)}
+                            value={companyName}
+                            name="Company Name"
+                        />
                     </label>
                     <label>
                         <span>Company Address</span>
-                        <input type="text" onChange={e => setCompanyAddress1(e.target.value)} value={companyAddress1} />
-                        <input type="text" onChange={e => setCompanyAddress2(e.target.value)} value={companyAddress2} />
-                        <input type="text" onChange={e => setCompanyAddress3(e.target.value)} value={companyAddress3} />
+                        <input
+                            type="text"
+                            onChange={e => setCompanyAddress1(e.target.value)}
+                            value={companyAddress1}
+                            name="Company Address 1"
+                        />
+                        <input
+                            type="text"
+                            onChange={e => setCompanyAddress2(e.target.value)}
+                            value={companyAddress2}
+                            name="Company Address 2"
+                        />
+                        <input
+                            type="text"
+                            onChange={e => setCompanyAddress3(e.target.value)}
+                            value={companyAddress3}
+                            name="Company Address 3"
+                        />
                     </label>
                     <label>
                         <span>Email</span>
-                        <input type="email" onChange={e => setContactEmail(e.target.value)} value={contactEmail} />
+                        <input
+                            type="email"
+                            onChange={e => setContactEmail(e.target.value)}
+                            value={contactEmail}
+                            name="Contact Email"
+                        />
                     </label>
                     <label>
                         <span>Phone Number</span>
-                        <input type="phone" onChange={e => setContactPhone(e.target.value)} value={contactPhone} />
+                        <input
+                            type="phone"
+                            onChange={e => setContactPhone(e.target.value)}
+                            value={contactPhone}
+                            name="Contact Phone"
+                        />
                     </label>
                 </div>
                 <div className="termsAndConditions">
                     <label>
-                        <input type="checkbox" checked={agreeToTC} onChange={() => setAgreeToTC(!agreeToTC)} />
+                        <input
+                            type="checkbox"
+                            checked={agreeToTC}
+                            onChange={() => setAgreeToTC(!agreeToTC)}
+                            name="Accepted Terms and Conditions"
+                        />
                         <span>I agree to vendor terms and conditions</span>
                     </label>
                 </div>
@@ -128,7 +222,7 @@ const VendorApplication = ({ setShowApplication }) => {
                 <button
                     className={`${formIsValid ? '' : 'disabled'}`}
                     disabled={!formIsValid}
-                    onClick={e => handleSubmit(e)}
+                    onClick={handleSubmit}
                 >
                     Submit
                 </button>
