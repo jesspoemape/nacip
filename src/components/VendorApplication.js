@@ -30,7 +30,6 @@ const VendorApplication = ({ setShowApplication }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = new FormData(e.target);
-        const userId = Date.now();
         const parsedData = JSON.parse(stringifyFormData(data));
         Object.keys(parsedData).forEach(itemKey => {
             const item = parsedData[itemKey];
@@ -46,7 +45,7 @@ const VendorApplication = ({ setShowApplication }) => {
             "Company Name": companyName,
             "Company Address 1": companyAddress1,
             "Company Address 2": companyAddress2, 
-            "Company Address 2": companyAddress3, 
+            "Company Address 3": companyAddress3, 
             "Contact Email": contactEmail,
             "Contact Phone": contactPhone,
             "Accepted Terms and Conditions": agreeToTC,

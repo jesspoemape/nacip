@@ -1,36 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from 'react-redux';
 import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
 import { toast } from 'react-toastify';
+import * as actions from './../actions';
 
-const StripeButton = ({ amount, children, setShowApplication }) => {
+const StripeButton = ({ amount, children, setShowApplication, postStripePayment, stripe }) => {
     const publishableKey = "pk_test_gEdJvOYvEMSITbvwdoZ05jnf00FULwrN5f";
+
+    useEffect(() => {
+        if (stripe === 'success') {
+            const successContent = (
+                <div className="successContent">
+                    <p>Your payment was successful!</p>
+                    <span>You will receive an emailed receipt shortly.</span>
+                </div>
+            );
+            setShowApplication(false);
+            showToast(successContent, {
+                position: 'top-center',
+                autoClose: 10000,
+                pauseOnHover: true,
+            });
+        }
+    }, [setShowApplication, stripe]);
+    
+    const showToast = (content, options) => {
+        toast(content, options);
+    };
 
     const onToken = token => {
         const body = {
             amount: amount,
             token: token
         };
-        axios.post("http://localhost:8000/payment", body)
-            .then(response => {
-                const successContent = (
-                    <div className="successContent">
-                        <p>Your payment was successful!</p>
-                        <span>You will receive an emailed receipt shortly.</span>
-                    </div>
-                );
-
-                setShowApplication(false);
-                toast.default(successContent, {
-                    position: 'top-center',
-                    autoClose: 10000,
-                    pauseOnHover: true,
-                });
-
-            })
-            .catch(error => {
-                alert("Payment Error");
-            });
+        
+        postStripePayment(body);
     };
     return (
         <StripeCheckout
@@ -49,4 +53,9 @@ const StripeButton = ({ amount, children, setShowApplication }) => {
         </StripeCheckout>
     );
 };
-export default StripeButton;
+
+function mapStateToProps({ stripe, form }) {
+    return { stripe, form };
+}
+
+export default connect(mapStateToProps, actions)(StripeButton);
