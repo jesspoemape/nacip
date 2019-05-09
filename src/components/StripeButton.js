@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
-const StripeButton = ({ amount, children }) => {
+const StripeButton = ({ amount, children, setShowApplication }) => {
     const publishableKey = "pk_test_gEdJvOYvEMSITbvwdoZ05jnf00FULwrN5f";
 
     const onToken = token => {
@@ -10,15 +11,26 @@ const StripeButton = ({ amount, children }) => {
             amount: amount,
             token: token
         };
-    axios.post("http://localhost:8000/payment", body)
-        .then(response => {
-            console.log(response);
-            alert("Payment Success");
-        })
-        .catch(error => {
-            console.log("Payment Error: ", error);
-            alert("Payment Error");
-        });
+        axios.post("http://localhost:8000/payment", body)
+            .then(response => {
+                const successContent = (
+                    <div className="successContent">
+                        <p>Your payment was successful!</p>
+                        <span>You will receive an emailed receipt shortly.</span>
+                    </div>
+                );
+
+                setShowApplication(false);
+                toast.default(successContent, {
+                    position: 'top-center',
+                    autoClose: 10000,
+                    pauseOnHover: true,
+                });
+
+            })
+            .catch(error => {
+                alert("Payment Error");
+            });
     };
     return (
         <StripeCheckout

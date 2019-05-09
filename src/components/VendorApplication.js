@@ -3,7 +3,7 @@ import moment from 'moment';
 import { applicationCosts } from './../utils/applicationCosts';
 import StripeButton from './StripeButton';
 
-const VendorApplication = () => {
+const VendorApplication = ({ setShowApplication }) => {
     const [vendorType, setVendorType] = useState(null);
     const [contactName, setContactName] = useState('');
     const [companyName, setCompanyName] = useState('');
@@ -46,6 +46,7 @@ const VendorApplication = () => {
             <form>
                 <h3>Vendor Application</h3>
                 <div className="vendorType">
+                <hr />
                     <p>Vendor Type</p>
                     <label className={`${vendorType === 'food' ? 'checked' : ''}`}>
                         <input
@@ -123,7 +124,7 @@ const VendorApplication = () => {
                 
                 
             </form>
-            <StripeButton amount={applicationCost} vendorType={vendorType}>
+            <StripeButton amount={applicationCost} vendorType={vendorType} setShowApplication={setShowApplication}>
                 <button
                     className={`${formIsValid ? '' : 'disabled'}`}
                     disabled={!formIsValid}

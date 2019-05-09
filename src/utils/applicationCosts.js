@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const applicationCosts = {
     food: {
         early: 60000,
@@ -21,4 +23,19 @@ const applicationCosts = {
     },
 };
 
-export { applicationCosts };
+const applicationDates = {
+    early: {
+        start: moment(),
+        end: moment('2019-05-31', 'YYYY-MM-DD'),
+    }, 
+    regular: {
+        start: moment('2019-06-01', 'YYYY-MM-DD'),
+        end: moment('2019-06-16', 'YYYY-MM-DD'),
+    },
+    late: {
+        start: moment('2019-06-17', 'YYYY-MM-DD'),
+        end: moment('2019-06-24', 'YYYY-MM-DD'),
+    },
+};
+
+export { applicationCosts, applicationDates };

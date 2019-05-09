@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  min-height: calc(100vh - 230px)
 }
 
 // COLORS
@@ -47,6 +48,13 @@ $yellow: #f1c40f;
     }
 }
 
+.successContent {
+    p {
+        font-size: 1.25em;
+        display: block;
+        font-weight: 600;
+    }
+}
 /* HEADER */
 
 header {
@@ -58,7 +66,30 @@ footer {
     height: 200px;
     text-align: center;
     background-color: $lightGray;
-    margin-top: 3em;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        font-size: 2em !important;
+        margin: 0 .25em;
+        color: $orange;
+        transition: 200ms all ease;
+
+        &:hover {
+            color: lighten($orange, 10%);
+            cursor: pointer;
+            -ms-transform: translate(0, -5px); /* IE 9 */
+            -webkit-transform: translate(0, -5px); /* Safari */
+            transform: translate(0, -5px);
+        }
+    }
+
+    p {
+        margin-top: 2em;
+    }
 }
 
 /* NAV */
@@ -87,9 +118,38 @@ nav {
         border: 1px solid $lightGray;
         width: 100%;
 
+        col.active {
+            border: 1px solid black;
+        }
+
         tr {
             &:nth-child(even) {
                 background-color: $lightGray;
+            }
+
+            $activeColumnBorder: 3px solid grey;
+
+            th.early.active,
+            th.regular.active,
+            th.late.active {
+                border-top: $activeColumnBorder;
+                border-right: $activeColumnBorder;
+                border-left: $activeColumnBorder;
+            }
+
+            td.early.active,
+            td.regular.active,
+            td.late.active {
+                border-right: $activeColumnBorder;
+                border-left: $activeColumnBorder;
+            }
+
+            &:last-child {
+                td.early.active,
+                td.regular.active,
+                td.late.active {
+                    border-bottom: $activeColumnBorder;
+                }
             }
 
            th, td {
@@ -99,6 +159,9 @@ nav {
 
             th {
                 background-color: $turquoise;
+                &.vendorType {
+                    background-color: darken($turquoise, 5%);
+                }
             }
         }
         
@@ -121,10 +184,22 @@ nav {
     }
 
     form {
+        margin-top: 3em;
+        padding: 2em;
         text-align: left;
+        -webkit-box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
+        -moz-box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
+        box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
+        border: 1px solid $lightGray;
 
         h3 {
             text-align: center;
+            margin-bottom: 2em;
+        }
+
+        hr {
+            border: none;
+            border-top: solid 1px $lightGray;
         }
 
         label {
@@ -134,6 +209,9 @@ nav {
 
         
         .vendorType {
+            p {
+                font-weight: 600;
+            }
             input {
                 margin-right: 1em;
                 @include customCheckbox(50px, $orange);
@@ -152,12 +230,17 @@ nav {
         
         .contactInformation {
             margin-top: 2em;
+
+            p {
+                font-weight: 600;
+            }
             
             input {
                 padding: 1em;
                 display: block;
                 width: 100%;
                 margin-top: .5em;
+                box-sizing: border-box;
                 
                 &:focus {
                     outline: 2px solid $purple;
@@ -196,7 +279,6 @@ nav {
         border: none;
         color: white;
         font-size: 1em;
-        width: 25%;
         margin: 0 auto;
         margin-top: 2em;
         font-weight: bold;
@@ -211,4 +293,70 @@ nav {
             background-color: $lightGray;
         }
     }
+
+    // Become A Vendor Button Animation
+    .becomeAVendorButton-enter {
+        opacity: 1;
+        height: 3.5em;
+    }
+    
+    .becomeAVendorButton-enter-active {
+        transition: opacity 500ms;
+        height: 3.5em;
+    }
+    
+    .becomeAVendorButton-enter-done {
+        height: 3.5em;
+    }
+    
+    .becomeAVendorButton-exit {
+        opacity: 1;
+        height: 3.5em;
+        margin-top: 2em;
+    }
+    
+    .becomeAVendorButton-exit-active {
+        opacity: 0;
+        margin-top: 0;
+        border: none;
+        transition: opacity 500ms;
+    }
+    
+    .becomeAVendorButton-exit-done {
+        opacity: 0;
+        margin-top: 0;
+        cursor: default;
+    }
+    // END - Become A Vendor Button Animation
+
+
+    // Vendor Application Animation
+    .vendorApplication-enter {
+        opacity: 0;
+    }
+    
+    .vendorApplication-enter-active {
+        opacity: 1;
+        transition: opacity 800ms;
+        transition-delay: 800ms;
+    }
+    
+    .vendorApplication-enter-done {
+        opacity: 1;
+    }
+    
+    .vendorApplication-exit {
+        opacity: 1;
+    }
+    
+    .vendorApplication-exit-active {
+        opacity: 0;
+        transition: opacity 300ms,;
+    }
+    
+    .vendorApplication-exit-done {
+        opacity: 0;
+    }
+
+    // END - endor Application Animation
 }
