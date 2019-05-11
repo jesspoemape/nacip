@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  min-height: calc(100vh - 230px)
+  min-height: calc(100vh - 75px)
 }
 
 // COLORS
@@ -48,6 +48,11 @@ $yellow: #f1c40f;
     }
 }
 
+@mixin box-shadow {
+    -webkit-box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
+    -moz-box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
+    box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
+}
 
 .successContent {
     p {
@@ -74,14 +79,13 @@ header {
 
 // FOOTER
 footer {
-    height: 200px;
+    height: 75px;
     text-align: center;
     background-color: $lightGray;
-    margin-top: 2em;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    padding-right: 2em;
     
     svg {
         font-size: 2em !important;
@@ -97,9 +101,12 @@ footer {
             transform: translate(0, -5px);
         }
     }
-    
-    p {
-        margin-top: 2em;
+
+    .hashtags {
+        span {
+            font-size: .75em;
+            margin-right: 1em;
+        }
     }
 }
 
@@ -115,6 +122,12 @@ nav {
         
         &:hover {
             background-color: $lightGray;
+        }
+
+        &.active {
+            color: $turquoise;
+            font-weight: bold;
+            border-bottom: 2px solid $turquoise;
         }
     }
 }
@@ -198,9 +211,7 @@ nav {
         margin-top: 3em;
         padding: 2em;
         text-align: left;
-        -webkit-box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
-        -moz-box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
-        box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
+        @include box-shadow();
         border: 1px solid $lightGray;
         
         h3 {
@@ -409,122 +420,265 @@ $parallax-perspective : 1 !default;
     height: 100vh;
     width: 100%;
     // Preserve 3D
-    &, * {
-        transform-style: preserve-3d;
-    }
     &::-webkit-scrollbar {
         height: 0;
         width: 0;
-      }
+    }
     
-      &::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
         height: 0;
         width: 0;
-      }
+    }
     
-      &::-webkit-scrollbar-track {
+    &::-webkit-scrollbar-track {
         height: 0;
         width: 0;
-      }
+    }
     
+    .googleMap {
+        height: 400px;
+        width: 100%;
+        .googleMapWrapper {
+            height: unset;
+        }
+
+    }
     #parallaxContainer {
-        :nth-child(1) {
+        .welcome {
+            position: absolute;
+            z-index: 1;
+            background: white;
+            border: 1px solid $lightGray;
+            left: 0;
+            right: 0;
+            @include box-shadow();
+            display: flex;
+            justify-content: space-around;
+            padding: 1em 5%;
+
+            h3 {
+                font-family: 'Rancho', cursive;
+                font-size: 4em;
+                padding-right: 1em;
+                margin: 0 .25em 0 0;
+                border-right: 2px solid $turquoise;
+                width: 25%;
+            }
+            .bullets {
+                border-right: 2px solid $purple;
+                text-align: left;
+                line-height: 2em;
+                padding-right: 1em;
+                margin-right: 1em;
+                ul {
+                    padding-left: 1em;
+                }
+            }
+            .address {
+                text-align: left;
+                .timedate {
+                    border-bottom: 1px solid $yellow;
+                }
+            }
+        }
+
+        .origins h4,
+        .mission h4,
+        .schedule h4,
+        .tickets h4,
+        .map h4 {
+            font-family: 'Rancho', cursive;
+            font-size: 2em;
+            margin: .75em 0;
+        }
+
+        .origins {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            right: 0;
+            top: 600px;
+            background: white;
+            border: 1px solid $lightGray;
+            @include box-shadow();
+            text-align: left;
+            padding: 1em 2em;
+            margin: 0 10%;
+            line-height: 1.7em;
+        }
+
+        .mission {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            right: 0;
+            top: 1400px;
+            background: white;
+            border: 1px solid $lightGray;
+            padding: 1em 2em;
+            margin: 0 10%;
+            line-height: 1.7em;
+            text-align: left;
+            @include box-shadow();
+        }
+
+        .tripleGroup {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            right: 0;
+            top: 1900px;
+            margin: 0 10%;
+            display: flex;
+            flex-direction: column;
+
+            .scheduleAndTickets {
+                line-height: 1.7em;
+                text-align: left;
+                display: flex;
+                align-items: flex-end;
+                
+                .schedule {
+                    background: white;
+                    border: 1px solid $lightGray;
+                    padding: 1em 2em;
+                    margin-right: 1em;
+                    @include box-shadow();
+                }
+                
+                .tickets {
+                    background: white;
+                    border: 1px solid $lightGray;
+                    padding: 1em 2em;
+                    margin-left: 1em;
+                    @include box-shadow();
+                    width: 25%;
+                }
+            }
+            
+            .note {
+                background: white;
+                border: 1px solid $lightGray;
+                padding: 1em 2em;
+                margin-top: 2em;
+                text-align: left;
+                @include box-shadow();
+                line-height: 1.7em;
+            }
+        }
+
+        .map {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            right: 0;
+            top: 2600px;
+            margin: 0 10%;
+            background: white;
+            border: 1px solid $lightGray;
+            padding: 1em 2em;
+            @include box-shadow();
+        }
+
+            
+        // PARALLAX CHILDREN
+        .plx:nth-of-type(1) {
             @include parallax(-.4);
             top: 200px;
             left: 200px;
         }
         
-        :nth-child(2) {
+        .plx:nth-of-type(2) {
             @include parallax(.2);
             top: 200px;
             left: 500px;
             width: 25%;
         }
         
-        :nth-child(3) {
+        .plx:nth-of-type(3) {
             @include parallax(.3);
             top: 400px;
             left: 600px;
             width: 50%;
         }
         
-        :nth-child(4) {
+        .plx:nth-of-type(4) {
             @include parallax(.1);
             top: 500px;
             left: 500px;
             width: 15%;
         }
         
-        :nth-child(5) {
+        .plx:nth-of-type(5) {
             @include parallax(-2);
             top: 2000px;
             left: 2000px;
             width: 50%;
         }
         
-        :nth-child(6) {
+        .plx:nth-of-type(6) {
             @include parallax(.4);
             top: 600px;
             left: 300px;
             width: 75%;
         }
         
-        :nth-child(7) {
+        .plx:nth-of-type(7) {
             @include parallax(-1);
             top: 400px;
             left: 1000px;
             width: 25%;
         }
         
-        :nth-child(8) {
+        .plx:nth-of-type(8) {
             @include parallax(-.4);
             top: 100px;
             left: 1400px;
             width: 30%;
         }
         
-        :nth-child(9) {
+        .plx:nth-of-type(9) {
             @include parallax(.4);
             top: 900px;
             left: 500px;
             width: 50%;
         }
         
-        :nth-child(10) {
+        .plx:nth-of-type(10) {
             @include parallax(-1);
             top: 1600px;
             left: 100px;
             width: 15%;
         }
 
-        :nth-child(11) {
+        .plx:nth-of-type(11) {
             @include parallax(.1);
             top: 500px;
             left: 500px;
         }
         
-        :nth-child(12) {
+        .plx:nth-of-type(12) {
             @include parallax(-2);
             top: 2000px;
             left: 2000px;
             width: 15%;
         }
         
-        :nth-child(13) {
+        .plx:nth-of-type(13) {
             @include parallax(.4);
             top: 600px;
             left: 300px;
             width: 75%;
         }
         
-        :nth-child(14) {
+        .plx:nth-of-type(14) {
             @include parallax(-1);
             top: 400px;
             left: 1000px;
             width: 50%;
         }
 
-        :nth-child(15) {
+        .plx:nth-of-type(15) {
             @include parallax(-.2);
             top: 2000px;
             left: 2000px;
