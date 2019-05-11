@@ -18,11 +18,13 @@ export const postStripePayment = body => (dispatch) => {
 };
 
 export const postFormDataToSheets = form => (dispatch) => {
+    // For integration instructions, see
+    // https://github.com/jamiewilson/form-to-google-sheets
     const formattedFormData = Object.keys(form).reduce((formData, key) => {
         formData.append(key, form[key]);
         return formData;
     }, new FormData());
-    
+
     const url = 'https://script.google.com/macros/s/AKfycbz23PL0CfDjt70NeBXQwct7hI7fHMh2-xCqMWuqg3Ij8xdWAoc/exec';
     axios.post(url, formattedFormData)
         .then(response => {
