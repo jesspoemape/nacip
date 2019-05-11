@@ -3,6 +3,7 @@ import AnimateHeight from 'react-animate-height';
 import { CSSTransition } from 'react-transition-group';
 import VendorApplication from './VendorApplication';
 import VendorCostsTable from './VendorCostsTable';
+
 const Vendors = () => {
     const [showApplication, setShowApplication] = useState(false);
     return (

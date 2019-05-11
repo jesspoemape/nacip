@@ -7,6 +7,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.8.2",
     "@fortawesome/free-solid-svg-icons": "^5.8.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "animated": "^0.2.2",
     "axios": "^0.18.0",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
@@ -19,7 +20,7 @@
     "react-scripts": "3.0.0",
     "react-stripe-checkout": "^2.6.3",
     "react-toastify": "^5.1.0",
-    "react-transition-group": "^4.0.0",
+    "react-transition-group": "^4.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },

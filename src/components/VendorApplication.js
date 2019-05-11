@@ -1,10 +1,11 @@
 import React, { useState, Fragment } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
-import axios from 'axios';
 import { applicationCosts } from './../utils/applicationCosts';
 import StripeButton from './StripeButton';
+import * as actions from '../actions';
 
-const VendorApplication = ({ setShowApplication }) => {
+const VendorApplication = ({ setShowApplication, saveFormDataToStore, postFormDataToSheets }) => {
     const [vendorType, setVendorType] = useState(null);
     const [contactName, setContactName] = useState('');
     const [companyName, setCompanyName] = useState('');
@@ -28,47 +29,24 @@ const VendorApplication = ({ setShowApplication }) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = new FormData(e.target);
-        const parsedData = JSON.parse(stringifyFormData(data));
-        Object.keys(parsedData).forEach(itemKey => {
-            const item = parsedData[itemKey];
-            if (item.length === 0) {
-                delete parsedData[itemKey];
-                
-            };
-        });
-        console.log('parsedData::', parsedData);
-        const fakeData = {
-            "Vendor Type": vendorType,
-            "Contact Name": contactName,
-            "Company Name": companyName,
-            "Company Address 1": companyAddress1,
-            "Company Address 2": companyAddress2, 
-            "Company Address 3": companyAddress3, 
-            "Contact Email": contactEmail,
-            "Contact Phone": contactPhone,
-            "Accepted Terms and Conditions": agreeToTC,
-            "Date": new Date(),
+        const formattedFormData = {
+            'Vendor Type': vendorType,
+            'Contact Name': contactName,
+            'Company Name': companyName,
+            'Company Address 1': companyAddress1,
+            'Company Address 2': companyAddress2, 
+            'Company Address 3': companyAddress3, 
+            'Contact Email': contactEmail,
+            'Contact Phone': contactPhone,
+            'Accepted Terms and Conditions': agreeToTC,
+            'Date': new Date(),
         };
-        const sheetsScriptURL = process.env.SHEETS_SCRIPT_URL;
-        axios.post(sheetsScriptURL, { data: fakeData })
-            .then(() => {
-                alert('Form Submitted!')
-                resetForm();
-            })
-            .catch(e => {
-                console.log('ERROR:: ', e);
-            }
-        );
+        saveFormDataToStore(formattedFormData);
     }
 
-    const stringifyFormData = (fd) => {
-        const data = {};
-          for (let key of fd.keys()) {
-            data[key] = fd.get(key);
-        }
-        return JSON.stringify(data, null, 2);
+    const handleCancel = () => {
+        resetForm();
+        setShowApplication(false);
     }
 
     const resetForm = () => {
@@ -96,7 +74,7 @@ const VendorApplication = ({ setShowApplication }) => {
 
     return (
         <Fragment>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <h3>Vendor Application</h3>
                 <div className="vendorType">
                 <hr />
@@ -219,16 +197,22 @@ const VendorApplication = ({ setShowApplication }) => {
             </form>
             <StripeButton amount={applicationCost} vendorType={vendorType} setShowApplication={setShowApplication}>
                 <button
-                    className={`${formIsValid ? '' : 'disabled'}`}
+                    className={`${formIsValid ? '' : 'disabled'} submit`}
                     disabled={!formIsValid}
                     onClick={handleSubmit}
                 >
                     Submit
                 </button>
             </StripeButton>
+            <button
+                className="cancel"
+                onClick={handleCancel}
+            >
+                Cancel
+            </button>
         </Fragment>
 
     );
 }
 
-export default VendorApplication;
+export default connect(null, actions)(VendorApplication);

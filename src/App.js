@@ -6,7 +6,6 @@ import Home from './components/Home';
 import Vendors from './components/Vendors';
 import About from './components/About';
 import BecomeASponsor from './components/BecomeASponsor';
-import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +18,6 @@ const App = () => {
             <div className="App">
                 <ToastContainer />
                 <Header />
-                <Navigation />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/vendors" component={Vendors} />
                 <Route exact path="/about" component={About} />

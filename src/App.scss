@@ -48,6 +48,7 @@ $yellow: #f1c40f;
     }
 }
 
+
 .successContent {
     p {
         font-size: 1.25em;
@@ -58,7 +59,17 @@ $yellow: #f1c40f;
 /* HEADER */
 
 header {
-    margin: 2em;
+    &.homePageHeader {
+        margin: 2em;
+    }
+
+    &.minimalHeader {
+        display: flex;
+        padding: 0 1em;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid $lightGray;
+    }
 }
 
 // FOOTER
@@ -71,13 +82,13 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    
     svg {
         font-size: 2em !important;
         margin: 0 .25em;
         color: $orange;
         transition: 200ms all ease;
-
+        
         &:hover {
             color: lighten($orange, 10%);
             cursor: pointer;
@@ -86,7 +97,7 @@ footer {
             transform: translate(0, -5px);
         }
     }
-
+    
     p {
         margin-top: 2em;
     }
@@ -101,7 +112,7 @@ nav {
         text-transform: uppercase;
         color: black;
         transition: 150ms background-color ease-in;
-
+        
         &:hover {
             background-color: $lightGray;
         }
@@ -112,23 +123,23 @@ nav {
 /* -- VENDORS */
 #vendors {
     margin: 0 10%;
-
+    
     table {
         border-collapse: collapse;
         border: 1px solid $lightGray;
         width: 100%;
-
+        
         col.active {
             border: 1px solid black;
         }
-
+        
         tr {
             &:nth-child(even) {
                 background-color: $lightGray;
             }
-
-            $activeColumnBorder: 3px solid grey;
-
+            
+            $activeColumnBorder: 3px solid $orange;
+            
             th.early.active,
             th.regular.active,
             th.late.active {
@@ -136,14 +147,14 @@ nav {
                 border-right: $activeColumnBorder;
                 border-left: $activeColumnBorder;
             }
-
+            
             td.early.active,
             td.regular.active,
             td.late.active {
                 border-right: $activeColumnBorder;
                 border-left: $activeColumnBorder;
             }
-
+            
             &:last-child {
                 td.early.active,
                 td.regular.active,
@@ -151,12 +162,12 @@ nav {
                     border-bottom: $activeColumnBorder;
                 }
             }
-
-           th, td {
+            
+            th, td {
                 padding: .5em;
                 text-align: left;
             }
-
+            
             th {
                 background-color: $turquoise;
                 &.vendorType {
@@ -166,7 +177,7 @@ nav {
         }
         
     }
-
+    
     .becomeAVendor {
         background-color: $purple;
         color: white;
@@ -176,13 +187,13 @@ nav {
         font-size: 1em;
         transition: 150ms background-color ease-in;
         margin-top: 2em;
-
+        
         &:hover {
             background-color: darken($purple, 10%);
             cursor: pointer;
         }
     }
-
+    
     form {
         margin-top: 3em;
         padding: 2em;
@@ -191,22 +202,22 @@ nav {
         -moz-box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
         box-shadow: 3px 2px 10px -1px rgba(158,158,158,0.76);
         border: 1px solid $lightGray;
-
+        
         h3 {
             text-align: center;
             margin-bottom: 2em;
         }
-
+        
         hr {
             border: none;
             border-top: solid 1px $lightGray;
         }
-
+        
         label {
             display: block;
             margin: 1em 0;
         }
-
+        
         
         .vendorType {
             p {
@@ -230,7 +241,7 @@ nav {
         
         .contactInformation {
             margin-top: 2em;
-
+            
             p {
                 font-weight: 600;
             }
@@ -275,7 +286,6 @@ nav {
     button {
         padding: 1em;
         text-transform: uppercase;
-        background-color: $turquoise;
         border: none;
         color: white;
         font-size: 1em;
@@ -285,15 +295,31 @@ nav {
         transition: 150ms background-color ease-in;
 
         &:not(.disabled):hover {
-            background-color: darken($turquoise, 10%);
             cursor: pointer;
         }
+    }
 
+    button.cancel {
+        background-color: $orange;
+        margin-left: 2em;
+
+        &:not(.disabled):hover {
+            background-color: darken($orange, 10%);
+        }
+    }
+
+    button.submit {
+        background-color: $turquoise;
+        
+        &:not(.disabled):hover {
+            background-color: darken($turquoise, 10%);
+        }
+        
         &.disabled {
             background-color: $lightGray;
         }
     }
-
+    
     // Become A Vendor Button Animation
     .becomeAVendorButton-enter {
         opacity: 1;
@@ -328,8 +354,8 @@ nav {
         cursor: default;
     }
     // END - Become A Vendor Button Animation
-
-
+    
+    
     // Vendor Application Animation
     .vendorApplication-enter {
         opacity: 0;
@@ -357,6 +383,162 @@ nav {
     .vendorApplication-exit-done {
         opacity: 0;
     }
-
+    
     // END - endor Application Animation
+}
+
+// Magic parallax mixins
+
+$parallax-perspective : 1 !default;
+
+@mixin parallax(
+    $distance    : 0,
+    $perspective : $parallax-perspective
+    ) {
+    transform: translateZ($distance * $perspective * 1px) scale(abs($distance - 1));
+    z-index: $distance * 1000;
+}
+
+// End of magic parallax mixins
+
+#about {
+    overflow: auto;
+    overflow-x: hidden;
+    perspective: 1 * 1px;
+    transform-style: preserve-3d;
+    height: 100vh;
+    width: 100%;
+    // Preserve 3D
+    &, * {
+        transform-style: preserve-3d;
+    }
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+      }
+    
+      &::-webkit-scrollbar-thumb {
+        height: 0;
+        width: 0;
+      }
+    
+      &::-webkit-scrollbar-track {
+        height: 0;
+        width: 0;
+      }
+    
+    #parallaxContainer {
+        :nth-child(1) {
+            @include parallax(-.4);
+            top: 200px;
+            left: 200px;
+        }
+        
+        :nth-child(2) {
+            @include parallax(.2);
+            top: 200px;
+            left: 500px;
+            width: 25%;
+        }
+        
+        :nth-child(3) {
+            @include parallax(.3);
+            top: 400px;
+            left: 600px;
+            width: 50%;
+        }
+        
+        :nth-child(4) {
+            @include parallax(.1);
+            top: 500px;
+            left: 500px;
+            width: 15%;
+        }
+        
+        :nth-child(5) {
+            @include parallax(-2);
+            top: 2000px;
+            left: 2000px;
+            width: 50%;
+        }
+        
+        :nth-child(6) {
+            @include parallax(.4);
+            top: 600px;
+            left: 300px;
+            width: 75%;
+        }
+        
+        :nth-child(7) {
+            @include parallax(-1);
+            top: 400px;
+            left: 1000px;
+            width: 25%;
+        }
+        
+        :nth-child(8) {
+            @include parallax(-.4);
+            top: 100px;
+            left: 1400px;
+            width: 30%;
+        }
+        
+        :nth-child(9) {
+            @include parallax(.4);
+            top: 900px;
+            left: 500px;
+            width: 50%;
+        }
+        
+        :nth-child(10) {
+            @include parallax(-1);
+            top: 1600px;
+            left: 100px;
+            width: 15%;
+        }
+
+        :nth-child(11) {
+            @include parallax(.1);
+            top: 500px;
+            left: 500px;
+        }
+        
+        :nth-child(12) {
+            @include parallax(-2);
+            top: 2000px;
+            left: 2000px;
+            width: 15%;
+        }
+        
+        :nth-child(13) {
+            @include parallax(.4);
+            top: 600px;
+            left: 300px;
+            width: 75%;
+        }
+        
+        :nth-child(14) {
+            @include parallax(-1);
+            top: 400px;
+            left: 1000px;
+            width: 50%;
+        }
+
+        :nth-child(15) {
+            @include parallax(-.2);
+            top: 2000px;
+            left: 2000px;
+            width: 25%;
+        }
+    }
+    margin: auto;
+
+    > * {
+        position: absolute;
+    }
+
+    h2 {
+        font-size: 3em;
+        @include parallax(.2);
+    }
 }
