@@ -537,6 +537,7 @@ $parallax-perspective : 1 !default;
                 text-align: left;
                 display: flex;
                 align-items: flex-end;
+                justify-content: space-between;
                 
                 .schedule {
                     background: white;
@@ -544,6 +545,7 @@ $parallax-perspective : 1 !default;
                     padding: 1em 2em;
                     margin-right: 1em;
                     @include box-shadow();
+                    width: 60%;
                 }
                 
                 .tickets {
@@ -552,7 +554,12 @@ $parallax-perspective : 1 !default;
                     padding: 1em 2em;
                     margin-left: 1em;
                     @include box-shadow();
-                    width: 25%;
+                    width: 30%;
+
+                    p {
+                        display: flex;
+                        justify-content: space-between;
+                    }
                 }
             }
             

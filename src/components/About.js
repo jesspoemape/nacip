@@ -91,9 +91,9 @@ const About = () => {
                         </div>
                         <div className="tickets">
                             <h4>Powwow Admission</h4>
-                            <p><strong>Adults</strong> - $5</p>
-                            <p><strong>Youth (K-12)</strong> - $5</p>
-                            <p><strong>Under 3 and over 65</strong> - Free</p>
+                            <p><strong>Adults</strong>$5</p>
+                            <p><strong>Youth (K-12)</strong>$5</p>
+                            <p><strong>Under 3 and over 65</strong>Free</p>
                             <hr />
                             <p>
                                 Gates charged full price on July 24th all evening.
@@ -111,11 +111,11 @@ const About = () => {
                     <h4>Event Map</h4>
                 </div>
 
-                <div className="hashtags">
+                {/* <div className="hashtags">
                     <span>#nacip</span>
                     <span>#nativeamericancelebrationintheparkpowwow</span>
                     <span>#nacippowwowfestival</span>
-                </div>
+                </div> */}
 
 
                 <img className="plx" src={image1} alt="colored square on point" />
