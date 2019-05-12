@@ -20,9 +20,12 @@ const About = () => {
         <section id="about">
             <div id="parallaxContainer">
                 <div className="welcome">
-                    <h3>Yaateeh!</h3>
+                    <div className="hello">
+                        <h3>Yá atééh!</h3>
+                        <p>Hello in Navajo</p>
+                    </div>
                     <div className="bullets">
-                        <p><strong>The Native American Celebration in the park</strong></p>
+                        <p><strong>The Native American Celebration in the Park</strong></p>
                         <ul>
                             <li>Intertribal Contest Powwow</li>
                             <li>Food, Arts and Crafts, and Commercial Booths</li>
@@ -38,7 +41,7 @@ const About = () => {
                         </div>
                         <p>LIBERTY PARK</p>
                         <p>600 East 1100 South</p>
-                        <p>Salt Lake City, Utah</p>
+                        <p>Salt Lake City, Utah 84105</p>
                     </div>
                 </div>
                 <div className="origins">

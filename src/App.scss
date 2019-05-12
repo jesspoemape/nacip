@@ -456,14 +456,19 @@ $parallax-perspective : 1 !default;
             justify-content: space-around;
             padding: 1em 5%;
 
-            h3 {
-                font-family: 'Rancho', cursive;
-                font-size: 4em;
+            .hello {
                 padding-right: 1em;
                 margin: 0 .25em 0 0;
                 border-right: 2px solid $turquoise;
                 width: 25%;
+
+                h3 {
+                font-family: 'Rancho', cursive;
+                font-size: 4em;
+                margin-bottom: .25em;
             }
+            }
+            
             .bullets {
                 border-right: 2px solid $purple;
                 text-align: left;

@@ -6,7 +6,10 @@ import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg
 const Footer = () => {
     return (
         <footer>
-            <p>The Native American Celebration in the Park</p>
+            <div>
+                <p>The Native American Celebration in the Park</p>
+                <p></p>   
+            </div>
             <section>
                 <a
                     href="https://www.facebook.com/nacippowwow"

@@ -1,5 +1,4 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-console.log('process.env.STRIPE_SECRET_KEY: ', process.env.STRIPE_SECRET_KEY);
 
 const stripeChargeCallback = res => (stripeErr, stripeRes) => {
     if (stripeErr) {
@@ -9,13 +8,6 @@ const stripeChargeCallback = res => (stripeErr, stripeRes) => {
     }
 };
 const paymentApi = app => {
-    app.get("/", (req, res) => {
-        res.send({
-            message: "Hello Stripe checkout server!",
-            timestamp: new Date().toISOString()
-        });
-    });
-
     app.post("/payment", (req, res) => {
         const body = {
             source: req.body.token.id,

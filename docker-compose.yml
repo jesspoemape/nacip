@@ -1,0 +1,11 @@
+version: '3'
+services: 
+  webapp:
+    restart: always
+    image: jesspoemape/nacip
+    environment:
+      VIRTUAL_PORT: 8000
+      VIRTUAL_HOST: nacippowwow.com
+      LETSENCRYPT_HOST: nacippowwow.com
+      LETSENCRYPT_EMAIL: jesspoemape@gmail.com
+
