@@ -8,6 +8,20 @@ const Vendors = () => {
     const [showApplication, setShowApplication] = useState(false);
     return (
         <section id="vendors">
+            <h2>Vendors</h2>
+            <div>
+                <h3>Mandatory Vendor Meeting</h3>
+                <p>Date: July 17, 2019</p>
+                <p>Time: 6pm-7pm</p>
+                <p>Place: TBA</p>
+
+                <p>Booth numbers will be assigned at the meeting.</p>
+            </div>
+            <div>
+            <a href="https://docs.google.com/document/d/1iSASorNz5M1uYIK4oO9uC3B5qK39uWVsyhuhJbXWuho/edit?usp=sharing" rel="noopener noreferrer" target="_blank">
+                See Vendor Agreement here.
+            </a>
+            </div>
             <VendorCostsTable />
             <AnimateHeight duration={800} height={showApplication ? 'auto' : 0}>
                 <CSSTransition in={showApplication} timeout={1200} classNames="vendorApplication">

@@ -7,6 +7,7 @@ const Navigation = (props) => {
         <nav>
             <Link to="/" className={!path ? 'active' : ''}>Home</Link>
             <Link to="/about" className={path === 'about' ? 'active' : ''}>About</Link>
+            <Link to="/powwow" className={path === 'powwow' ? 'active' : ''}>Powwow</Link>
             <Link to="/vendors" className={path === 'vendors' ? 'active' : ''}>Vendors</Link>
             <Link to="/become-a-sponsor" className={path === 'become-a-sponsor' ? 'active' : ''}>Become A Sponsor</Link>
         </nav>

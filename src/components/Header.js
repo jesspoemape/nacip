@@ -7,7 +7,10 @@ const Header = (props) => {
     if (path) {
         return (
             <header className="minimalHeader">
-                <h1>NACIP | Powwwow and Festival</h1>
+                <h1>
+                    NACIP <br/>
+                    <span>Powwow and Festival</span>
+                </h1>
                 <Navigation />
             </header>
         );

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import moment from 'moment';
-import { applicationCosts, applicationDates } from './../utils/applicationCosts';
+import { applicationCosts, applicationDates } from '../../utils/applicationCosts';
 
 const VendorCostsTable = () => {
     let activeBracket = 'none';

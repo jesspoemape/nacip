@@ -74,6 +74,17 @@ header {
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid $lightGray;
+        h1 {
+            text-align: left;
+            line-height: .75em;
+            span {
+                border-top: 1px solid black;
+                padding-top: .25em;
+                margin-top: .5em;
+                font-size: 50%;
+                display: block;
+            }
+        }
     }
 }
 
@@ -135,7 +146,7 @@ nav {
 /* PAGES */
 /* -- VENDORS */
 #vendors {
-    margin: 0 10%;
+    margin: 0 10% 5% 10%;
     
     table {
         border-collapse: collapse;
@@ -444,54 +455,8 @@ $parallax-perspective : 1 !default;
 
     }
     #parallaxContainer {
-        .welcome {
-            position: absolute;
-            z-index: 1;
-            background: white;
-            border: 1px solid $lightGray;
-            left: 0;
-            right: 0;
-            @include box-shadow();
-            display: flex;
-            justify-content: space-around;
-            padding: 1em 5%;
-
-            .hello {
-                padding-right: 1em;
-                margin: 0 .25em 0 0;
-                border-right: 2px solid $turquoise;
-                width: 25%;
-
-                h3 {
-                font-family: 'Rancho', cursive;
-                font-size: 4em;
-                margin-bottom: .25em;
-            }
-            }
-            
-            .bullets {
-                border-right: 2px solid $purple;
-                text-align: left;
-                line-height: 2em;
-                padding-right: 1em;
-                margin-right: 1em;
-                ul {
-                    padding-left: 1em;
-                }
-            }
-            .address {
-                text-align: left;
-                .timedate {
-                    border-bottom: 1px solid $yellow;
-                }
-            }
-        }
-
         .origins h4,
-        .mission h4,
-        .schedule h4,
-        .tickets h4,
-        .map h4 {
+        .mission h4 {
             font-family: 'Rancho', cursive;
             font-size: 2em;
             margin: .75em 0;
@@ -502,7 +467,7 @@ $parallax-perspective : 1 !default;
             z-index: 1;
             left: 0;
             right: 0;
-            top: 600px;
+            top: 50px;
             background: white;
             border: 1px solid $lightGray;
             @include box-shadow();
@@ -517,7 +482,7 @@ $parallax-perspective : 1 !default;
             z-index: 1;
             left: 0;
             right: 0;
-            top: 1400px;
+            top: 900px;
             background: white;
             border: 1px solid $lightGray;
             padding: 1em 2em;
@@ -526,13 +491,218 @@ $parallax-perspective : 1 !default;
             text-align: left;
             @include box-shadow();
         }
+            
+        // PARALLAX CHILDREN
+        .plx:nth-of-type(1) {
+            @include parallax(-.4);
+            top: 20px;
+            left: 20px;
+        }
+        
+        .plx:nth-of-type(2) {
+            @include parallax(.2);
+            top: 50px;
+            left: 500px;
+            width: 25%;
+        }
+        
+        .plx:nth-of-type(3) {
+            @include parallax(.3);
+            top: 100px;
+            left: 60px;
+            width: 50%;
+        }
+        
+        .plx:nth-of-type(4) {
+            @include parallax(.1);
+            top: 750px;
+            left: 50px;
+            width: 15%;
+        }
+        
+        .plx:nth-of-type(5) {
+            @include parallax(-2);
+            top: 200px;
+            left: 200px;
+            width: 50%;
+        }
+        
+        .plx:nth-of-type(6) {
+            @include parallax(.4);
+            top: 60px;
+            left: 30px;
+            width: 75%;
+        }
+        
+        .plx:nth-of-type(7) {
+            @include parallax(-1);
+            top: 150px;
+            left: 1000px;
+            width: 25%;
+        }
+        
+        .plx:nth-of-type(8) {
+            @include parallax(-.4);
+            top: 125px;
+            left: 1400px;
+            width: 30%;
+        }
+        
+        .plx:nth-of-type(9) {
+            @include parallax(.4);
+            top: 175px;
+            left: 500px;
+            width: 50%;
+        }
+        
+        .plx:nth-of-type(10) {
+            @include parallax(-1);
+            top: 200px;
+            left: 10px;
+            width: 15%;
+        }
+
+        .plx:nth-of-type(11) {
+            @include parallax(.1);
+            top: 50px;
+            left: 5px;
+        }
+        
+        .plx:nth-of-type(12) {
+            @include parallax(-2);
+            top: 2000px;
+            left: 2000px;
+            width: 15%;
+        }
+        
+        .plx:nth-of-type(13) {
+            @include parallax(.4);
+            top: 600px;
+            left: 300px;
+            width: 75%;
+        }
+        
+        .plx:nth-of-type(14) {
+            @include parallax(-1);
+            top: 400px;
+            left: 1000px;
+            width: 50%;
+        }
+
+        .plx:nth-of-type(15) {
+            @include parallax(-.2);
+            top: 2000px;
+            left: 2000px;
+            width: 25%;
+        }
+    }
+    margin: auto;
+
+    > * {
+        position: absolute;
+    }
+
+    h2 {
+        font-size: 3em;
+        @include parallax(.2);
+    }
+}
+
+#powwow {
+    overflow: auto;
+    overflow-x: hidden;
+    perspective: 1 * 1px;
+    transform-style: preserve-3d;
+    height: 100vh;
+    width: 100%;
+    // Preserve 3D
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        height: 0;
+        width: 0;
+    }
+    
+    &::-webkit-scrollbar-track {
+        height: 0;
+        width: 0;
+    }
+    
+    .googleMap {
+        height: 400px;
+        width: 100%;
+        .googleMapWrapper {
+            height: unset;
+        }
+
+    }
+
+    #parallaxContainer {
+        @mixin sectionBase() {
+            position: absolute;
+            z-index: 1;
+            background: white;
+            border: 1px solid $lightGray;
+            left: 0;
+            right: 0;
+            @include box-shadow();
+        }
+
+        .hello {
+            @include sectionBase();
+
+            h3 {
+                font-family: 'Rancho', cursive;
+                font-size: 4em;
+                margin-bottom: .25em;
+                margin-top: .25em;
+            }
+        }
+        
+        .events {
+            @include sectionBase();
+            padding: 1em 5%;
+            text-align: left;
+            line-height: 2em;
+            top: 1350px;
+            margin: 0 10%;
+            ul {
+                padding-left: 1em;
+            }
+        }
+
+        .address {
+            @include sectionBase();
+            padding: 1em 5%;
+            text-align: left;
+            top: 300px;
+            margin: 0 30%;
+            text-align: center;
+
+            .timedate {
+                font-weight: bold;
+                border-bottom: 1px solid $yellow;
+            }
+        }
+
+        .schedule h4,
+        .tickets h4,
+        .map h4,
+        .events h4 {
+            font-family: 'Rancho', cursive;
+            font-size: 2em;
+            margin: .75em 0;
+        }
 
         .tripleGroup {
             position: absolute;
             z-index: 1;
             left: 0;
             right: 0;
-            top: 1900px;
+            top: 650px;
             margin: 0 10%;
             display: flex;
             flex-direction: column;
@@ -584,7 +754,7 @@ $parallax-perspective : 1 !default;
             z-index: 1;
             left: 0;
             right: 0;
-            top: 2600px;
+            top: 1750px;
             margin: 0 10%;
             background: white;
             border: 1px solid $lightGray;

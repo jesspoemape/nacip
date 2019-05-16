@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux';
 import StripeCheckout from "react-stripe-checkout";
 import { toast } from 'react-toastify';
-import * as actions from './../actions';
+import * as actions from '../../actions';
 
 const StripeButton = ({
     amount,
@@ -12,11 +12,17 @@ const StripeButton = ({
     stripe,
     postFormDataToSheets,
     form,
+    resetFormState,
+    resetLocalForm,
+    resetStripe,
 }) => {
     const publishableKey = "pk_test_gEdJvOYvEMSITbvwdoZ05jnf00FULwrN5f";
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
-        if (stripe === 'success') {
+        if (stripe === 'success' && !submitted) {
+            setSubmitted(true);
+            resetStripe();
             const successContent = (
                 <div className="successContent">
                     <p>Your payment was successful!</p>
@@ -30,8 +36,12 @@ const StripeButton = ({
                 autoClose: 10000,
                 pauseOnHover: true,
             });
+            resetFormState();
+            resetLocalForm();
         }
-        if (stripe === 'failure') {
+        if (stripe === 'failure' && !submitted) {
+            setSubmitted(true);
+            resetStripe();
             const failureContent = (
                 <div className="successContent">
                     <p>Your payment failed!</p>
@@ -44,8 +54,10 @@ const StripeButton = ({
                 autoClose: 10000,
                 pauseOnHover: true,
             });
+            resetFormState();
+            resetLocalForm();
         }
-    }, [form, postFormDataToSheets, setShowApplication, stripe]);
+    }, [form, postFormDataToSheets, resetFormState, resetLocalForm, resetStripe, setShowApplication, stripe, submitted]);
     
     const showToast = (content, options) => {
         toast(content, options);

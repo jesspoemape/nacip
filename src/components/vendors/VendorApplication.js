@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { applicationCosts } from './../utils/applicationCosts';
+import { applicationCosts } from '../../utils/applicationCosts';
 import StripeButton from './StripeButton';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 
 const VendorApplication = ({ setShowApplication, saveFormDataToStore, postFormDataToSheets }) => {
     const [vendorType, setVendorType] = useState(null);
@@ -45,11 +45,11 @@ const VendorApplication = ({ setShowApplication, saveFormDataToStore, postFormDa
     }
 
     const handleCancel = () => {
-        resetForm();
+        resetLocalForm();
         setShowApplication(false);
     }
 
-    const resetForm = () => {
+    const resetLocalForm = () => {
         setVendorType(null);
         setContactName('');
         setCompanyName('');
@@ -195,7 +195,12 @@ const VendorApplication = ({ setShowApplication, saveFormDataToStore, postFormDa
                 
                 
             </form>
-            <StripeButton amount={applicationCost} vendorType={vendorType} setShowApplication={setShowApplication}>
+            <StripeButton
+                amount={applicationCost}
+                vendorType={vendorType}
+                setShowApplication={setShowApplication}
+                resetLocalForm={resetLocalForm}
+            >
                 <button
                     className={`${formIsValid ? '' : 'disabled'} submit`}
                     disabled={!formIsValid}
